@@ -33,7 +33,7 @@ public class CountryWeatherService {
         Map<String, Object> weatherData = (Map<String, Object>) weather.get("main");
         double temperature = (Double) weatherData.get("temp");
         int humidity = (Integer) weatherData.get("humidity");
-        String description = ((Map<String, Object>)((List<Object>) weather.get("weather")).get(0)).get("description").toString();
+        String description = getWeatherDescription(weather);
 
         return new CountryWeatherResponse(
                 country,
@@ -42,6 +42,10 @@ public class CountryWeatherService {
                 description,
                 humidity
         );
+    }
+
+    private String getWeatherDescription(Map<String, Object> weather){
+        return ((Map<String, Object>)((List<Object>) weather.get("weather")).get(0)).get("description").toString();
     }
 
 }
